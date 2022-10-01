@@ -7,6 +7,7 @@ const User = ({ user, handleToggleBookMark }) => {
 			<td>
 				{user.qualities.map((qualitie) => (
 					<Qualitie
+						key={qualitie._id}
 						color={qualitie.color}
 						name={qualitie.name}
 						_id={qualitie._id}
@@ -18,6 +19,7 @@ const User = ({ user, handleToggleBookMark }) => {
 			<td>{user.rate}</td>
 			<td>
 				<BookMark
+					id={user._id}
 					status={user.bookmark}
 					handleToggleBookMark={handleToggleBookMark}
 				/>
