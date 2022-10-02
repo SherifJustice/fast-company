@@ -1,5 +1,6 @@
 import React from 'react'
 import User from './user'
+import PropTypes from 'prop-types'
 const Users = ({ users, handleDelete, handleToggleBookMark }) => {
 	return users.map((user) => (
 		<tr key={user._id}>
@@ -15,6 +16,12 @@ const Users = ({ users, handleDelete, handleToggleBookMark }) => {
 			</td>
 		</tr>
 	))
+}
+
+Users.propTypes = {
+	users: PropTypes.array.isRequired,
+	handleDelete: PropTypes.func.isRequired,
+	handleToggleBookMark: PropTypes.func.isRequired,
 }
 
 export default Users

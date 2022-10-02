@@ -1,6 +1,7 @@
 import React from 'react'
 import Qualitie from './qualitie'
 import BookMark from './bookmark'
+import PropTypes from 'prop-types'
 const User = ({ user, handleToggleBookMark }) => {
 	return (
 		<>
@@ -26,6 +27,10 @@ const User = ({ user, handleToggleBookMark }) => {
 			</td>
 		</>
 	)
+}
+
+User.propTypes = {
+	handleToggleBookMark: PropTypes.func.isRequired,
 }
 
 export default User
