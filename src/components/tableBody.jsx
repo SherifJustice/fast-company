@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
-import { Link } from 'react-router-dom'
+// import SearchUser from './searchUser'
 
-const TableBody = ({ data, columns }) => {
+const TableBody = ({ data, columns, search }) => {
+	// const [search, setSearch] = useState('')
+
+	// const searchedUser = data.filter((user) => {
+	// 	return user.name.toLowerCase().trim().includes(search.toLowerCase().trim())
+	// })
 	const renderContent = (item, column) => {
 		if (columns[column].component) {
 			const component = columns[column].component
@@ -13,25 +18,30 @@ const TableBody = ({ data, columns }) => {
 
 			return component
 		}
-		if (columns[column].path === 'name') {
-			return (
-				<Link key={item._id} to={`/users/${item._id}`}>
-					{item.name}
-				</Link>
-			)
-		}
 		return _.get(item, columns[column].path)
 	}
 	return (
-		<tbody>
-			{data.map((item) => (
-				<tr key={item._id}>
-					{Object.keys(columns).map((column) => (
-						<td key={column}>{renderContent(item, column)}</td>
-					))}
-				</tr>
-			))}
-		</tbody>
+		<>
+			{/* <div className="form">
+				<form className="search__form">
+					<input
+						type="text"
+						placeholder="Search..."
+						className="search__input w-100 mx-auto"
+						onChange={(event) => setSearch(event.target.value)}
+					/>
+				</form>
+			</div> */}
+			<tbody>
+				{search.map((item) => (
+					<tr key={item._id}>
+						{Object.keys(columns).map((column) => (
+							<td key={column}>{renderContent(item, column)}</td>
+						))}
+					</tr>
+				))}
+			</tbody>
+		</>
 	)
 }
 
