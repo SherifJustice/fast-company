@@ -6,7 +6,7 @@ import _ from 'lodash'
 const TableBody = ({ data, columns, search }) => {
 	// const [search, setSearch] = useState('')
 
-	// const searchedUser = data.filter((user) => {
+	// const findedUser  = data.filter((user) => {
 	// 	return user.name.toLowerCase().trim().includes(search.toLowerCase().trim())
 	// })
 	const renderContent = (item, column) => {
@@ -33,7 +33,7 @@ const TableBody = ({ data, columns, search }) => {
 				</form>
 			</div> */}
 			<tbody>
-				{search.map((item) => (
+				{data.map((item) => (
 					<tr key={item._id}>
 						{Object.keys(columns).map((column) => (
 							<td key={column}>{renderContent(item, column)}</td>

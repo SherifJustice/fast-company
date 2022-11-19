@@ -7,7 +7,6 @@ import GroupList from './groupList'
 import SearchStatus from './searchStatus'
 import UserTable from './usersTable'
 import _ from 'lodash'
-// import SearchUser from './searchUser'
 const UsersList = () => {
 	const [currentPage, setCurrentPage] = useState(1)
 	const [professions, setProfession] = useState()
@@ -40,11 +39,7 @@ const UsersList = () => {
 	}, [])
 	useEffect(() => {
 		setCurrentPage(1)
-	}, [selectedProf])
-
-	const handleProfessionSelect = (item) => {
-		setSelectedProf(item)
-	}
+	}, [selectedProf, search])
 
 	const handlePageChange = (pageIndex) => {
 		setCurrentPage(pageIndex)
@@ -52,23 +47,44 @@ const UsersList = () => {
 	const handleSort = (item) => {
 		setSortBy(item)
 	}
+
+	const handleProfessionSelect = (item) => {
+		setSelectedProf(item)
+		setSearch('')
+	}
+
+	const handleSearch = (e) => {
+		if (e.target.value) {
+			setSearch(e.target.value)
+			setSelectedProf('')
+		} else {
+			setSearch('')
+		}
+	}
 	if (users) {
-		const filteredUsers = selectedProf
+		const filteredOrSearchedUsers = selectedProf
 			? users.filter(
 					(user) =>
 						JSON.stringify(user.profession) === JSON.stringify(selectedProf)
 			  )
+			: search
+			? users.filter((user) =>
+					user.name.toLowerCase().trim().includes(search.toLowerCase().trim())
+			  )
 			: users
 
-		const findedUser = users.filter((user) => {
-			return user.name.toLowerCase().includes(search.toLowerCase())
-		})
-		const sortedUsers = _.orderBy(filteredUsers, [sortBy.path], [sortBy.order])
+		const sortedUsers = _.orderBy(
+			filteredOrSearchedUsers,
+			[sortBy.path],
+			[sortBy.order]
+		)
 
-		const count = filteredUsers.length
+		const count = filteredOrSearchedUsers.length
 		const usersCrop = paginate(sortedUsers, currentPage, pageSize)
+
 		const clearFilter = () => {
-			setSelectedProf()
+			setSelectedProf('')
+			setSearch('')
 		}
 
 		return (
@@ -88,13 +104,14 @@ const UsersList = () => {
 				)}
 				<div className="d-flex flex-column">
 					<SearchStatus length={count} />
-					<div className="form">
-						<form className="search__form">
+					<div>
+						<form>
 							<input
 								type="text"
 								placeholder="Search..."
 								className="search__input w-100 mx-auto"
-								onChange={(event) => setSearch(event.target.value)}
+								onChange={(e) => handleSearch(e)}
+								value={search}
 							/>
 						</form>
 					</div>
@@ -102,7 +119,6 @@ const UsersList = () => {
 						<UserTable
 							selectedSort={sortBy}
 							users={usersCrop}
-							search={findedUser}
 							onSort={handleSort}
 							onDelete={handleDelete}
 							onToggleBookMark={handleToggleBookMark}

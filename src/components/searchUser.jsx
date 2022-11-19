@@ -9,16 +9,18 @@ const SearchUser = ({ users }) => {
 	})
 
 	return (
-		<div className="form">
-			<form className="search__form">
-				<input
-					type="text"
-					placeholder="Search..."
-					className="search__input w-100 mx-auto"
-					onChange={(event) => setSearch(event.target.value)}
-				/>
-			</form>
-		</div>
+		<>
+			<div className="form">
+				<form className="search__form">
+					<input
+						type="text"
+						placeholder="Search..."
+						className="search__input w-100 mx-auto"
+						onChange={(event) => setSearch(event.target.value)}
+					/>
+				</form>
+			</div>
+		</>
 	)
 }
 
