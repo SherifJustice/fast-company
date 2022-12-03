@@ -1,33 +1,34 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import api from '../api'
-import QualitiesList from './qualitiesList'
+import api from '../../../api'
+import Qualities from '../../ui/qualities'
 
 const UserPage = ({ userID }) => {
-	const history = useHistory()
+	const router = useHistory()
 	const [user, setUser] = useState()
 	useEffect(() => {
 		api.users.getById(userID).then((data) => setUser(data))
-	})
-	const handleAllUsers = () => {
-		history.push('/users')
+	}, [])
+	const handleChEditUser = () => {
+		router.push(`/users/${userID}/edit`)
 	}
 	if (user) {
 		return (
 			<div>
 				<h1>{user.name}</h1>
 				<h2>Профессия: {user.profession.name}</h2>
-				<QualitiesList qualities={user.qualities} />
+				<Qualities qualities={user.qualities} />
 				<p>CompletedMeetings:{user.completedMeetings}</p>
 				<h1>Rate:{user.rate}</h1>
 				<button
 					className="btn btn-secondary mt-2"
 					onClick={() => {
-						handleAllUsers()
+						handleChEditUser()
 					}}
 				>
-					Все пользователи
+					Изменить
 				</button>
 			</div>
 		)

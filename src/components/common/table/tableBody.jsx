@@ -1,14 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
-// import SearchUser from './searchUser'
 
-const TableBody = ({ data, columns, search }) => {
-	// const [search, setSearch] = useState('')
-
-	// const findedUser  = data.filter((user) => {
-	// 	return user.name.toLowerCase().trim().includes(search.toLowerCase().trim())
-	// })
+const TableBody = ({ data, columns }) => {
 	const renderContent = (item, column) => {
 		if (columns[column].component) {
 			const component = columns[column].component
@@ -22,16 +16,6 @@ const TableBody = ({ data, columns, search }) => {
 	}
 	return (
 		<>
-			{/* <div className="form">
-				<form className="search__form">
-					<input
-						type="text"
-						placeholder="Search..."
-						className="search__input w-100 mx-auto"
-						onChange={(event) => setSearch(event.target.value)}
-					/>
-				</form>
-			</div> */}
 			<tbody>
 				{data.map((item) => (
 					<tr key={item._id}>
