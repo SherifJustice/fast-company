@@ -30,7 +30,11 @@ const UserProvider = ({ children }) => {
       setUsers(content)
       setLoading(false)
     } catch (error) {
+<<<<<<< HEAD
       //   errorCatcher(error)
+=======
+      errorCatcher(error)
+>>>>>>> 8f585a6ad783ff5c8179c7b04876d953e6c27ef1
     }
   }
   useEffect(() => {
@@ -41,11 +45,19 @@ const UserProvider = ({ children }) => {
       setUsers(newUsers)
     }
   }, [currentUser])
+<<<<<<< HEAD
   //   function errorCatcher(error) {
   //     const { message } = error.response.data
   //     setError(message)
   //     setLoading(false)
   //   }
+=======
+  function errorCatcher(error) {
+    const { message } = error.response.data
+    setError(message)
+    setLoading(false)
+  }
+>>>>>>> 8f585a6ad783ff5c8179c7b04876d953e6c27ef1
   function getUserById(userId) {
     return users.find((u) => u._id === userId)
   }

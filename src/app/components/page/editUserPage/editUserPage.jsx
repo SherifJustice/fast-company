@@ -7,15 +7,22 @@ import RadioField from "../../common/form/radioField"
 import MultiSelectField from "../../common/form/multiSelectField"
 import BackHistoryButton from "../../common/backButton"
 import { useAuth } from "../../../hooks/useAuth"
+<<<<<<< HEAD
+=======
+import { useProfessions } from "../../../hooks/useProfession"
+>>>>>>> 8f585a6ad783ff5c8179c7b04876d953e6c27ef1
 import { useSelector } from "react-redux"
 import {
   getQualities,
   getQualitiesLoadingStatus
 } from "../../../store/qualities"
+<<<<<<< HEAD
 import {
   getProfessions,
   getProfessionsLoadingStatus
 } from "../../../store/profession"
+=======
+>>>>>>> 8f585a6ad783ff5c8179c7b04876d953e6c27ef1
 
 const EditUserPage = () => {
   const history = useHistory()
@@ -28,8 +35,12 @@ const EditUserPage = () => {
     label: q.name,
     value: q._id
   }))
+<<<<<<< HEAD
   const professions = useSelector(getProfessions())
   const professionLoading = useSelector(getProfessionsLoadingStatus())
+=======
+  const { professions, isLoading: professionLoading } = useProfessions()
+>>>>>>> 8f585a6ad783ff5c8179c7b04876d953e6c27ef1
   const professionsList = professions.map((p) => ({
     label: p.name,
     value: p._id
